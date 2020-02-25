@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Onsen Trial</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+    ons-splitter-side[animation=overlay] {
+        border-left: 1px solid #3bb2b8;
+    }
+</style>
+<body>
+    
+    <ons-navigator id="appNavigator" swipeable swipe-target-width="80px">
+      <ons-page>
+        <ons-splitter id="appSplitter">
+          <ons-splitter-side id="sidemenu" page="sidemenu.html" swipeable side="right" collapse="" width="260px"></ons-splitter-side>
+          <ons-splitter-content page="tabbar.html"></ons-splitter-content>
+        </ons-splitter>
+      </ons-page>
+    </ons-navigator>
+
+    <template id="tabbar.html">
+      <ons-page id="tabbar-page">
+        <ons-toolbar>
+          <div class="center">Discovery</div>
+          <div class="right">
+            <ons-toolbar-button onclick="fn.toggleMenu()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+        <ons-tabbar swipeable id="appTabbar" position="auto">
+          <ons-tab label="Discovery" icon="fa-home" page="home.html" active></ons-tab>
+          <ons-tab label="Top Foods" icon="fa-trophy" page="foods.html"></ons-tab>
+          <ons-tab label="Bookmark" icon="fa-bookmark" page="bookmark.html"></ons-tab>
+          <ons-tab label="Profile" icon="fa-user" page="profile.html"></ons-tab>
+        </ons-tabbar>
+
+        <script>
+          ons.getScriptPage().addEventListener('prechange', function(event) {
+            if (event.target.matches('#appTabbar')) {
+              event.currentTarget.querySelector('ons-toolbar .center').innerHTML = event.tabItem.getAttribute('label');
+            }
+          });
+        </script>
+      </ons-page>
+    </template>
+
+    <template id="sidemenu.html">
+      <ons-page>
+        <ons-list>
+          <ons-list-item onclick="fn.loadView(0)">
+            <div class="left"><span><i class="fas fa-tachometer-alt"></i></span></div>
+            <div class="center">Home</div>
+          </ons-list-item>
+          <ons-list-item onclick="fn.loadView(1)">
+            <div class="left"><sapn><i class="fas fa-cog"></i></sapn></div>
+            <div class="center">Settings</div>
+          </ons-list-item>
+          <ons-list-item onclick="fn.loadView(2)">
+            <div class="left"><span><i class="fas fa-bookmark"></i></span></div>
+            <div class="center">Saved</div>
+          </ons-list-item>
+        </ons-list>
+
+        <ons-list-title style="margin-top: 10px">Contacts</ons-list-title>
+        <ons-list>
+          <ons-list-item onclick="fn.loadLink('https://facebook.com/')">
+            <div class="left"><span><i class="fab fa-facebook-f"></i></span></div>
+            <div class="center">Facebook</div>
+          </ons-list-item>
+          <ons-list-item onclick="fn.loadLink('https://instagram.com/')">
+            <div class="left"><span><i class="fab fa-instagram"></i></span></ons-icon></div>
+            <div class="center">Instagram</div>
+          </ons-list-item>
+          <ons-list-item onclick="fn.loadLink('https://twitter.com/')">
+            <div class="left"><span><i class="fab fa-twitter"></i></span></div>
+            <div class="center">Twitter</div>
+          </ons-list-item>
+        </ons-list>
+
+        <script>
+          ons.getScriptPage().onInit = function() {
+            // Set ons-splitter-side animation
+            this.parentElement.setAttribute('animation', ons.platform.isAndroid() ? 'overlay' : 'reveal');
+          };
+        </script>
+
+        <style>
+          ons-list-item {
+            color: #444;
+          }
+        </style>
+      </ons-page>
+    </template>
+
+    <template id="home.html">
+        <ons-page id="cards">
+            <div class="w-100">
+                <ons-card id="bars" class="w-45 float-left" onclick="fn.pushPage({'id': 'bars.html', 'title': 'Bars and Hotels'})">
+                    <center><span><i class="fas fa-beer fa-2x"></i></span></center>
+                    <p class="text-dark text-center pt-2">Bars and Hotels</p>
+                    <p class="text-muted text-center m-0 p-0">42 places</p>
+                </ons-card>
+                <ons-card id="dining" class="w-45 float-right" onclick="fn.pushPage({'id': 'dining.html', 'title': 'Fine Dining'})">
+                    <center><span><i class="fas fa-bread-slice fa-2x"></i></span></center>
+                    <p class="text-dark text-center pt-2">Fine Dining</p>
+                    <p class="text-muted text-center m-0 p-0">75 places</p>
+                </ons-card>
+            </div>
+            <div class="w-100">
+                <ons-card id="cafes" class="w-45 float-left">
+                    <center><span><i class="fas fa-hotel fa-2x"></i></span></center>
+                    <p class="text-dark text-center pt-2">Cafes</p>
+                    <p class="text-muted text-center m-0 p-0">28 places</p>
+                </ons-card>
+                <ons-card id="nearby" class="w-45 float-right" onclick="fn.pushPage({'id': 'nearby.html', 'title': 'Nearby'})">
+                    <center><span><i class="fas fa-location-arrow fa-2x"></i></span></center>
+                    <p class="text-dark text-center pt-2">Nearby</p>
+                    <p class="text-muted text-center m-0 p-0">34 places</p>
+                </ons-card>
+            </div>
+            <div class="w-100">
+                <ons-card id="foods" class="w-45 float-left">
+                    <center><span><i class="fas fa-hotdog fa-2x"></i></span></center>
+                    <p class="text-dark text-center pt-2">Fsat Foods</p>
+                    <p class="text-muted text-center m-0 p-0">20 places</p>
+                </ons-card>
+                <ons-card id="featured" class="w-45 float-right">
+                    <center><span><i class="fas fa-ice-cream fa-2x"></i></span></center>
+                    <p class="text-dark text-center pt-2">Featured Foods</p>
+                    <p class="text-muted text-center m-0 p-0">21 places</p>
+                </ons-card>
+            </div>
+            <style>
+                .w-45 {
+                    width: 45%;
+                }
+            </style>
+        </ons-page>
+    </template>
+
+    <template id="foods.html">
+      <ons-page id="forms-page">
+            <!-- Content Goes Here -->
+      </ons-page>
+    </template>
+
+    <template id="nearby.html">
+      <ons-page id="dialogs-page">
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button>Back</ons-back-button>
+          </div>
+          <div class="center"></div>
+        </ons-toolbar>
+
+        <ons-list>
+            <ons-list-item class="input-items">
+                <ons-search-input id="search-input" maxlength="20" placeholder="Search for Restaurants"></ons-search-input>
+            </ons-list-item>
+        </ons-list>
+        
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Good Thai</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ro nemo itaque!</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Good Thai</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. tum consequatur.</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Good Thai</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Good Thai</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Good Thai</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Good Thai</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. quasi!</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+
+        <script>
+            ons.getScriptPage().onInit = function () {
+                this.querySelector('ons-toolbar div.center').textContent = this.data.title;
+            }
+        </script>
+      </ons-page>
+    </template>
+
+    <template id="bars.html">
+      <ons-page id="dialogs-page">
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button>Back</ons-back-button>
+          </div>
+          <div class="center"></div>
+        </ons-toolbar>
+
+        <ons-list>
+            <ons-list-item class="input-items">
+                <ons-search-input id="search-input" maxlength="20" placeholder="Search for Hotels"></ons-search-input>
+            </ons-list-item>
+        </ons-list>
+        
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">The Concord Hotel</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ro nemo itaque!</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">The Concord Hotel</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. tum consequatur.</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Pyramid continental Hotel</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">Oscar Hotel</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">James Hotel</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+            </ons-list-item>
+        </ons-card>
+        <ons-card>
+            <ons-list-item>
+                <div class="left">
+                    <img class="list-item__thumbnail" src="/media/kuzco/ENT/fb1.jpg">
+                </div>
+                <div class="center">
+                    <h3 class="title">The Concord Hotel</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. quasi!</p>
+                </div>
+            </ons-list-item>
+        </ons-card>
+
+        <script>
+            ons.getScriptPage().onInit = function () {
+                this.querySelector('ons-toolbar div.center').textContent = this.data.title;
+            }
+        </script>
+      </ons-page>
+    </template>
+
+    <template id="dining.html">
+      <ons-page id="dialogs-page">
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button>Back</ons-back-button>
+          </div>
+          <div class="center"></div>
+        </ons-toolbar>
+
+        <ons-list>
+            <ons-list-item class="input-items">
+                <ons-search-input id="search-input" maxlength="20" placeholder="Search for Hotels"></ons-search-input>
+            </ons-list-item>
+        </ons-list>
+        
+        <div class="w-100">
+            <ons-card id="bars" class="w-45 float-left" onclick="fn.pushPage({'id': '.html', 'title': 'Bars and Hotels'})">
+                <img src="/media/kuzco/ENT/fb1.jpg" alt="" class="img-thumbnail">
+            </ons-card>
+            <ons-card id="dining" class="w-45 float-right" onclick="fn.pushPage({'id': '.html', 'title': 'Fine Dining'})">
+                <img src="/media/kuzco/ENT/fb1.jpg" alt="" class="img-thumbnail">
+            </ons-card>
+        </div>
+        <div class="w-100">
+            <ons-card id="cafes" class="w-45 float-left" onclick="fn.pushPage({'id': '.html', 'title': 'Fine Dining'})">
+                <img src="/media/kuzco/ENT/fb1.jpg" alt="" class="img-thumbnail">
+            </ons-card>
+            <ons-card id="nearby" class="w-45 float-right" onclick="fn.pushPage({'id': '.html', 'title': 'Nearby'})">
+                <img src="/media/kuzco/ENT/fb1.jpg" alt="" class="img-thumbnail">
+            </ons-card>
+        </div>
+        <div class="w-100">
+            <ons-card id="foods" class="w-45 float-left" onclick="fn.pushPage({'id': '.html', 'title': 'Fine Dining'})">
+                <img src="/media/kuzco/ENT/fb1.jpg" alt="" class="img-thumbnail">
+            </ons-card>
+            <ons-card id="featured" class="w-45 float-right" onclick="fn.pushPage({'id': '.html', 'title': 'Fine Dining'})">
+                <img src="/media/kuzco/ENT/fb1.jpg" alt="" class="img-thumbnail">
+            </ons-card>
+        </div>
+        <div class="w-100">
+            <ons-card id="foods" class="w-45 float-left" onclick="fn.pushPage({'id': '.html', 'title': 'Fine Dining'})">
+                <img src="/media/kuzco/ENT/fb1.jpg" alt="" class="img-thumbnail">
+            </ons-card>
+        </div>
+        <script>
+            ons.getScriptPage().onInit = function () {
+                this.querySelector('ons-toolbar div.center').textContent = this.data.title;
+            }
+        </script>
+        <style>
+            .w-45 {
+                width: 45%;
+            }
+        </style>
+      </ons-page>
+    </template>
+
+    <template id="profile.html">
+        <ons-page> 
+        <!-- Content Goes Here -->
+        </ons-page>
+    </template>
+
+    <template id="bookmark.html">
+      <ons-page>
+        <!-- Content Goes Here -->
+      </ons-page>
+    </template>
+
+    <template id="login.html">
+      <ons-page>
+        <section id="profile_thumbnail">
+                <center><img src="/media/kuzco/ENT/fb1.jpg" alt="profile" class="img-thumbnail rounded-circle mt-5 mb-5" style="width: 25%;height: 25%;"></center>
+            </section>
+            <ons-list class="mt-2 ml-1 mr-1">
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center">
+                        <ons-input id="name-input" float maxlength="20" placeholder="Username or Email address"></ons-input>
+                    </label>
+                </ons-list-item>
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center">
+                        <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Password"></ons-input>
+                    </label>
+                </ons-list-item>
+            </ons-list>
+            <div class="center mt-5">
+                <center><ons-button modifier="light" icon="fa-check" class="button-margin w-50 border-0 shadow">&nbsp;Login</ons-button></center>
+            </div>
+            <section class="mt-5">
+                <p class="text-muted text-center">Login with</p>
+                <center>
+                    <ons-icon icon="fa-twitter-square" class="ml-3 fs"></ons-icon>
+                    <ons-icon icon="fa-facebook-square" class="ml-3 fs"></ons-icon>
+                    <ons-icon icon="fa-instagram" class="ml-3 fs"></ons-icon>
+                </center>
+            </section>
+            <style>
+                .fs {
+                    font-size: 30px;
+                }
+            </style>
+      </ons-page>
+    </template>
+
+    <template id="signup.html">
+      <ons-page>
+        <section id="profile_thumbnail">
+                <center><img src="/media/kuzco/ENT/fb1.jpg" alt="profile" class="img-thumbnail rounded-circle mt-5 mb-5" style="width: 25%;height: 25%;"></center>
+            </section>
+            <ons-list-item class="input-items">
+                <div class="left">
+                    <ons-icon icon="fa-envelope" class="list-item__icon"></ons-icon>
+                </div>
+                <label class="center">
+                    <ons-input id="email-input" float maxlength="20" placeholder="Email address"></ons-input>
+                </label>
+            </ons-list-item>
+            <ons-list-item class="input-items">
+                <div class="left">
+                    <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+                </div>
+                <label class="center">
+                    <ons-input id="name-input" float maxlength="20" placeholder="Username"></ons-input>
+                </label>
+            </ons-list-item>
+            <ons-list-item class="input-items">
+                <div class="left">
+                    <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
+                </div>
+                <label class="center">
+                    <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Password"></ons-input>
+                </label>
+            </ons-list-item>
+            <ons-list-item class="input-items">
+                <div class="left">
+                    <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
+                </div>
+                <label class="center">
+                    <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Repeat Password"></ons-input>
+                </label>
+            </ons-list-item>
+            <div class="center mt-5">
+                <center><ons-button modifier="light" icon="fa-check" class="button-margin border-0 w-50 shadow">&nbsp;Sign up</ons-button></center>
+            </div>
+            <section class="mt-5">
+                <p class="text-muted text-center" onclick="fn.loadLink('https://policies.google.com/terms?hl=en-US')">Terms of Services</p>
+            </section>
+            <style>
+                .fs {
+                    font-size: 30px;
+                }
+            </style>
+      </ons-page>
+    </template>
+
+<script src="main.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
