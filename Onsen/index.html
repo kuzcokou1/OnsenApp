@@ -59,7 +59,7 @@
             <div class="left"><span><i class="fas fa-tachometer-alt"></i></span></div>
             <div class="center">Home</div>
           </ons-list-item>
-          <ons-list-item onclick="fn.loadView(1)">
+          <ons-list-item onclick="fn.pushPage({'id': 'settings.html', 'title': 'Settings'})">
             <div class="left"><sapn><i class="fas fa-cog"></i></sapn></div>
             <div class="center">Settings</div>
           </ons-list-item>
@@ -387,9 +387,162 @@
       </ons-page>
     </template>
 
+    <template id="settings.html">
+      <ons-page id="dialogs-page">
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button>Back</ons-back-button>
+          </div>
+          <div class="center"></div>
+        </ons-toolbar>
+        
+        <div class="w-100">
+            <ons-list>
+                <ons-list-item class="border-bottom" onclick="fn.pushPage({'id': 'set_profile.html', 'title': 'Profile'})">
+                    <div class="left"><img class="list-item__thumbnail rounded-circle" src="/media/kuzco/ENT/fb1.jpg"></div>
+                    <div class="center">
+                        <h4>Kuzco Kou</h4>
+                    </div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-key"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h5>Account</h5>
+                    </div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-sms"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h5>Chat</h5>
+                    </div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-bell"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h5>Notifications</h5>
+                    </div>
+                </ons-list-item>
+                <ons-list-item class="border-bottom">
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-question-circle"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h5>Help</h5>
+                    </div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-users"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <p>Invite a friend</p>
+                    </div>
+                </ons-list-item>
+            </ons-list>
+        </div>
+        
+        <script>
+            ons.getScriptPage().onInit = function () {
+                this.querySelector('ons-toolbar div.center').textContent = this.data.title;
+            }
+        </script>
+        <style>
+            .w-45 {
+                width: 45%;
+            }
+        </style>
+      </ons-page>
+    </template>
+
+    <template id="set_profile.html">
+        <ons-page> 
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center"></div>
+            </ons-toolbar>
+
+            <div class="m-5">
+                <center><img class="list-item__thumbnail rounded-circle" src="/media/kuzco/ENT/fb1.jpg" style="width: 50%;height: 50%;"></center>
+            </div>
+            <ons-list>
+                <ons-list-item class="border-bottom">
+                    <div class="left"><ons-icon fixed-width class="list-item__icon" icon="fa-user"></ons-icon></div>
+                    <div class="center">
+                        <h3 class="title text-muted">Kuzco Kou</h3>
+                        <p>lorem ipsum dummy text</p>
+                    </div>
+                    <div class="right"><ons-icon icon="fa-pencil-alt"></ons-icon></div>
+                </ons-list-item>
+                <ons-list-item class="border-bottom">
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-exclamation-circle"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h3 class="title text-muted">About</h3>
+                    </div>
+                    <div class="right"><ons-icon icon="fa-pencil-alt"></ons-icon></div>
+                </ons-list-item>
+                <ons-list-item class="border-bottom">
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-phone"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h3 class="titile text-muted">Phone</h3>
+                    </div>
+                    <div class="right"><ons-icon icon="fa-pencil-alt"></ons-icon></div>
+                </ons-list-item>
+            </ons-list>
+            <script>
+                ons.getScriptPage().onInit = function () {
+                    this.querySelector('ons-toolbar div.center').textContent = this.data.title;
+                }
+            </script>
+        </ons-page>
+    </template>
+
     <template id="profile.html">
         <ons-page> 
-        <!-- Content Goes Here -->
+
+            <div class="m-5">
+                <center><img class="list-item__thumbnail rounded-circle" src="/media/kuzco/ENT/fb1.jpg" style="width: 50%;height: 50%;"></center>
+            </div>
+            <ons-list>
+                <ons-list-item class="border-bottom">
+                    <div class="left"><ons-icon fixed-width class="list-item__icon" icon="fa-user"></ons-icon></div>
+                    <div class="center">
+                        <h3 class="title text-muted">Kuzco Kou</h3>
+                        <p>lorem ipsum dummy text</p>
+                    </div>
+                    <div class="right"><ons-icon icon="fa-pencil-alt"></ons-icon></div>
+                </ons-list-item>
+                <ons-list-item class="border-bottom">
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-exclamation-circle"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h3 class="title text-muted">About</h3>
+                    </div>
+                    <div class="right"><ons-icon icon="fa-pencil-alt"></ons-icon></div>
+                </ons-list-item>
+                <ons-list-item class="border-bottom">
+                    <div class="left">
+                        <ons-icon fixed-width class="list-item__icon" icon="fa-phone"></ons-icon>
+                    </div>
+                    <div class="center">
+                        <h3 class="titile text-muted">Phone</h3>
+                    </div>
+                    <div class="right"><ons-icon icon="fa-pencil-alt"></ons-icon></div>
+                </ons-list-item>
+            </ons-list>
+
         </ons-page>
     </template>
 
