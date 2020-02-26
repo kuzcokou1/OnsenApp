@@ -17,23 +17,72 @@
 <body>
     
     <ons-navigator id="appNavigator" swipeable swipe-target-width="80px">
-      <ons-page>
-        <ons-splitter id="appSplitter">
-          <ons-splitter-side id="sidemenu" page="sidemenu.html" swipeable side="right" collapse="" width="260px"></ons-splitter-side>
-          <ons-splitter-content page="tabbar.html"></ons-splitter-content>
-        </ons-splitter>
-      </ons-page>
+        <ons-page id="login.html">
+            <section id="profile_thumbnail">
+                <center><img src="/media/kuzco/ENT/fb1.jpg" alt="profile" class="img-thumbnail rounded-circle mt-5 mb-5" style="width: 25%;height: 25%;"></center>
+            </section>
+            <ons-list class="mt-2 ml-2 mr-2 p-3">
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center p-2">
+                        <ons-input id="username" float maxlength="20" placeholder="Username or Email address" modifier="underbar"></ons-input>
+                    </label>
+                </ons-list-item>
+            </ons-list>
+            <ons-list class="mt-4 ml-2 mr-2 p-3">
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center p-2">
+                        <ons-input id="password" type="password" float maxlength="20" placeholder="Password" modifier="underbar"></ons-input>
+                    </label>
+                </ons-list-item>
+            </ons-list>
+            <div class="center mt-5">
+                <center><ons-button modifier="light" icon="fa-check" onclick="login()" class="button-margin w-50 border-0 shadow">&nbsp;Login</ons-button></center>
+            </div>
+            <section class="mt-5">
+                <p class="text-muted text-center">Login with</p>
+                <center>
+                    <ons-icon icon="fa-twitter-square" class="ml-3 fs"></ons-icon>
+                    <ons-icon icon="fa-facebook-square" class="ml-3 fs"></ons-icon>
+                    <ons-icon icon="fa-instagram" class="ml-3 fs"></ons-icon>
+                </center>
+            </section>
+            <script>
+                const login = () => {
+                    const username = document.querySelector('#username').value;
+                    const password = document.querySelector('#password').value;
+
+                    if (username === 'kou' && password === 'kou') {
+                        // call the navigator to move to the new page
+                        const appNavigator = document.querySelector('#appNavigator');
+                        appNavigator.resetToPage('home.html');
+                    } else {
+                        ons.notification.alert('Wrong username/password combination');
+                    }
+                };
+            </script>
+            <style>
+                .fs {
+                    font-size: 30px;
+                }
+            </style>
+        </ons-page>
     </ons-navigator>
 
     <template id="tabbar.html">
       <ons-page id="tabbar-page">
         <ons-toolbar>
-          <div class="center">Discovery</div>
-          <div class="right">
+          <div class="left">
             <ons-toolbar-button onclick="fn.toggleMenu()">
               <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
             </ons-toolbar-button>
           </div>
+          <div class="center">Discovery</div>
         </ons-toolbar>
         <ons-tabbar swipeable id="appTabbar" position="auto">
           <ons-tab label="Discovery" icon="fa-home" page="home.html" active></ons-tab>
@@ -101,42 +150,51 @@
     </template>
 
     <template id="home.html">
-        <ons-page id="cards">
-            <div class="w-100">
-                <ons-card id="bars" class="w-45 float-left" onclick="fn.pushPage({'id': 'bars.html', 'title': 'Bars and Hotels'})">
-                    <center><span><i class="fas fa-beer fa-2x"></i></span></center>
-                    <p class="text-dark text-center pt-2">Bars and Hotels</p>
-                    <p class="text-muted text-center m-0 p-0">42 places</p>
-                </ons-card>
-                <ons-card id="dining" class="w-45 float-right" onclick="fn.pushPage({'id': 'dining.html', 'title': 'Fine Dining'})">
-                    <center><span><i class="fas fa-bread-slice fa-2x"></i></span></center>
-                    <p class="text-dark text-center pt-2">Fine Dining</p>
-                    <p class="text-muted text-center m-0 p-0">75 places</p>
-                </ons-card>
-            </div>
-            <div class="w-100">
-                <ons-card id="cafes" class="w-45 float-left">
-                    <center><span><i class="fas fa-hotel fa-2x"></i></span></center>
-                    <p class="text-dark text-center pt-2">Cafes</p>
-                    <p class="text-muted text-center m-0 p-0">28 places</p>
-                </ons-card>
-                <ons-card id="nearby" class="w-45 float-right" onclick="fn.pushPage({'id': 'nearby.html', 'title': 'Nearby'})">
-                    <center><span><i class="fas fa-location-arrow fa-2x"></i></span></center>
-                    <p class="text-dark text-center pt-2">Nearby</p>
-                    <p class="text-muted text-center m-0 p-0">34 places</p>
-                </ons-card>
-            </div>
-            <div class="w-100">
-                <ons-card id="foods" class="w-45 float-left">
-                    <center><span><i class="fas fa-hotdog fa-2x"></i></span></center>
-                    <p class="text-dark text-center pt-2">Fsat Foods</p>
-                    <p class="text-muted text-center m-0 p-0">20 places</p>
-                </ons-card>
-                <ons-card id="featured" class="w-45 float-right">
-                    <center><span><i class="fas fa-ice-cream fa-2x"></i></span></center>
-                    <p class="text-dark text-center pt-2">Featured Foods</p>
-                    <p class="text-muted text-center m-0 p-0">21 places</p>
-                </ons-card>
+        <ons-page>
+            <ons-toolbar>
+                <ons-splitter id="appSplitter" swipeable swipe-target-width="80px">
+                    <ons-splitter-side id="sidemenu" page="sidemenu.html" swipeable side="left" collapse="" width="260px"></ons-splitter-side>
+                    <ons-splitter-content page="tabbar.html"></ons-splitter-content>
+                </ons-splitter>
+            </ons-toolbar>
+
+            <div id="cards">
+                <div class="w-100">
+                    <ons-card id="bars" class="w-45 float-left" onclick="fn.pushPage({'id': 'bars.html', 'title': 'Bars and Hotels'})">
+                        <center><span><i class="fas fa-beer fa-2x"></i></span></center>
+                        <p class="text-dark text-center pt-2">Bars and Hotels</p>
+                        <p class="text-muted text-center m-0 p-0">42 places</p>
+                    </ons-card>
+                    <ons-card id="dining" class="w-45 float-right" onclick="fn.pushPage({'id': 'dining.html', 'title': 'Fine Dining'})">
+                        <center><span><i class="fas fa-bread-slice fa-2x"></i></span></center>
+                        <p class="text-dark text-center pt-2">Fine Dining</p>
+                        <p class="text-muted text-center m-0 p-0">75 places</p>
+                    </ons-card>
+                </div>
+                <div class="w-100">
+                    <ons-card id="cafes" class="w-45 float-left">
+                        <center><span><i class="fas fa-hotel fa-2x"></i></span></center>
+                        <p class="text-dark text-center pt-2">Cafes</p>
+                        <p class="text-muted text-center m-0 p-0">28 places</p>
+                    </ons-card>
+                    <ons-card id="nearby" class="w-45 float-right" onclick="fn.pushPage({'id': 'nearby.html', 'title': 'Nearby'})">
+                        <center><span><i class="fas fa-location-arrow fa-2x"></i></span></center>
+                        <p class="text-dark text-center pt-2">Nearby</p>
+                        <p class="text-muted text-center m-0 p-0">34 places</p>
+                    </ons-card>
+                </div>
+                <div class="w-100">
+                    <ons-card id="foods" class="w-45 float-left">
+                        <center><span><i class="fas fa-hotdog fa-2x"></i></span></center>
+                        <p class="text-dark text-center pt-2">Fast Foods</p>
+                        <p class="text-muted text-center m-0 p-0">20 places</p>
+                    </ons-card>
+                    <ons-card id="featured" class="w-45 float-right">
+                        <center><span><i class="fas fa-ice-cream fa-2x"></i></span></center>
+                        <p class="text-dark text-center pt-2">Featured Foods</p>
+                        <p class="text-muted text-center m-0 p-0">21 places</p>
+                    </ons-card>
+                </div>
             </div>
             <style>
                 .w-45 {
@@ -552,47 +610,6 @@
       </ons-page>
     </template>
 
-    <template id="login.html">
-      <ons-page>
-        <section id="profile_thumbnail">
-                <center><img src="/media/kuzco/ENT/fb1.jpg" alt="profile" class="img-thumbnail rounded-circle mt-5 mb-5" style="width: 25%;height: 25%;"></center>
-            </section>
-            <ons-list class="mt-2 ml-1 mr-1">
-                <ons-list-item class="input-items">
-                    <div class="left">
-                        <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
-                    </div>
-                    <label class="center">
-                        <ons-input id="name-input" float maxlength="20" placeholder="Username or Email address"></ons-input>
-                    </label>
-                </ons-list-item>
-                <ons-list-item class="input-items">
-                    <div class="left">
-                        <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
-                    </div>
-                    <label class="center">
-                        <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Password"></ons-input>
-                    </label>
-                </ons-list-item>
-            </ons-list>
-            <div class="center mt-5">
-                <center><ons-button modifier="light" icon="fa-check" class="button-margin w-50 border-0 shadow">&nbsp;Login</ons-button></center>
-            </div>
-            <section class="mt-5">
-                <p class="text-muted text-center">Login with</p>
-                <center>
-                    <ons-icon icon="fa-twitter-square" class="ml-3 fs"></ons-icon>
-                    <ons-icon icon="fa-facebook-square" class="ml-3 fs"></ons-icon>
-                    <ons-icon icon="fa-instagram" class="ml-3 fs"></ons-icon>
-                </center>
-            </section>
-            <style>
-                .fs {
-                    font-size: 30px;
-                }
-            </style>
-      </ons-page>
-    </template>
 
     <template id="signup.html">
       <ons-page>
