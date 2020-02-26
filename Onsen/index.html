@@ -24,7 +24,7 @@
             <ons-list class="mt-2 ml-2 mr-2 p-3">
                 <ons-list-item class="input-items">
                     <div class="left">
-                        <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+                        <ons-icon icon="md-email" class="list-item__icon"></ons-icon>
                     </div>
                     <label class="center p-2">
                         <ons-input id="username" float maxlength="20" placeholder="Username or Email address" modifier="underbar"></ons-input>
@@ -34,17 +34,22 @@
             <ons-list class="mt-4 ml-2 mr-2 p-3">
                 <ons-list-item class="input-items">
                     <div class="left">
-                        <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
+                        <ons-icon icon="md-lock-open" class="list-item__icon"></ons-icon>
                     </div>
                     <label class="center p-2">
                         <ons-input id="password" type="password" float maxlength="20" placeholder="Password" modifier="underbar"></ons-input>
                     </label>
                 </ons-list-item>
             </ons-list>
+            <p class="text-right text-info mr-2 pt-1">Forgot password?</p>
             <div class="center mt-5">
                 <center><ons-button modifier="light" icon="fa-check" onclick="login()" class="button-margin w-50 border-0 shadow">&nbsp;Login</ons-button></center>
             </div>
             <section class="mt-5">
+                <p class="text-center text-muted">New here? <a onclick="fn.pushPage({'id': 'signup.html', 'title': 'Sign Up'})">Create an acoount</a></p>
+            </section>
+            <section class="mt-2">
+                <div class="text-center mb-2">OR</div>
                 <p class="text-muted text-center">Login with</p>
                 <center>
                     <ons-icon icon="fa-twitter-square" class="ml-3 fs"></ons-icon>
@@ -74,6 +79,73 @@
         </ons-page>
     </ons-navigator>
 
+    <template id="signup.html">
+      <ons-page>
+        <div class="left">
+            <ons-back-button>Login</ons-back-button>
+        </div>
+        <section id="profile_thumbnail">
+                <center><img src="/media/kuzco/ENT/fb1.jpg" alt="profile" class="img-thumbnail rounded-circle mb-3" style="width: 25%;height: 25%;"></center>
+            </section>
+            <ons-list class="ml-2 mr-2 p-2">
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-email" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center">
+                        <ons-input id="email-input" float maxlength="20" placeholder="Email address"></ons-input>
+                    </label>
+                </ons-list-item>
+            </ons-list>
+            <ons-list class="mt-1 ml-2 mr-2 p-2">
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center">
+                        <ons-input id="name-input" float maxlength="20" placeholder="Username"></ons-input>
+                    </label>
+                </ons-list-item>
+            </ons-list>
+            <ons-list class="mt-1 ml-2 mr-2 p-2">
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-lock-open" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center">
+                        <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Password"></ons-input>
+                    </label>
+                </ons-list-item>
+            </ons-list>
+            <ons-list class="mt-1 ml-2 mr-2 p-2">
+                <ons-list-item class="input-items">
+                    <div class="left">
+                        <ons-icon icon="md-lock-open" class="list-item__icon"></ons-icon>
+                    </div>
+                    <label class="center">
+                        <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Repeat Password"></ons-input>
+                    </label>
+                </ons-list-item>
+            </ons-list>
+            <div class="center mt-4">
+                <center><ons-button modifier="light" icon="fa-check" class="button-margin border-0 w-50 shadow">&nbsp;Sign up</ons-button></center>
+            </div>
+            <section class="mt-5">
+                <p class="text-muted text-center">Sign Up with</p>
+                <center>
+                    <ons-icon icon="fa-twitter-square" class="ml-3 fs"></ons-icon>
+                    <ons-icon icon="fa-facebook-square" class="ml-3 fs"></ons-icon>
+                    <ons-icon icon="fa-instagram" class="ml-3 fs"></ons-icon>
+                </center>
+            </section>
+            <style>
+                .fs {
+                    font-size: 30px;
+                }
+            </style>
+      </ons-page>
+    </template>
+
     <template id="tabbar.html">
       <ons-page id="tabbar-page">
         <ons-toolbar>
@@ -82,7 +154,7 @@
               <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
             </ons-toolbar-button>
           </div>
-          <div class="center">Discovery</div>
+          <div class="right mr-3">Discovery</div>
         </ons-toolbar>
         <ons-tabbar swipeable id="appTabbar" position="auto">
           <ons-tab label="Discovery" icon="fa-home" page="home.html" active></ons-tab>
@@ -153,7 +225,7 @@
         <ons-page>
             <ons-toolbar>
                 <ons-splitter id="appSplitter" swipeable swipe-target-width="80px">
-                    <ons-splitter-side id="sidemenu" page="sidemenu.html" swipeable side="left" collapse="" width="260px"></ons-splitter-side>
+                    <ons-splitter-side id="sidemenu" page="sidemenu.html" swipeable side="right" collapse="" width="260px"></ons-splitter-side>
                     <ons-splitter-content page="tabbar.html"></ons-splitter-content>
                 </ons-splitter>
             </ons-toolbar>
@@ -610,57 +682,6 @@
       </ons-page>
     </template>
 
-
-    <template id="signup.html">
-      <ons-page>
-        <section id="profile_thumbnail">
-                <center><img src="/media/kuzco/ENT/fb1.jpg" alt="profile" class="img-thumbnail rounded-circle mt-5 mb-5" style="width: 25%;height: 25%;"></center>
-            </section>
-            <ons-list-item class="input-items">
-                <div class="left">
-                    <ons-icon icon="fa-envelope" class="list-item__icon"></ons-icon>
-                </div>
-                <label class="center">
-                    <ons-input id="email-input" float maxlength="20" placeholder="Email address"></ons-input>
-                </label>
-            </ons-list-item>
-            <ons-list-item class="input-items">
-                <div class="left">
-                    <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
-                </div>
-                <label class="center">
-                    <ons-input id="name-input" float maxlength="20" placeholder="Username"></ons-input>
-                </label>
-            </ons-list-item>
-            <ons-list-item class="input-items">
-                <div class="left">
-                    <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
-                </div>
-                <label class="center">
-                    <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Password"></ons-input>
-                </label>
-            </ons-list-item>
-            <ons-list-item class="input-items">
-                <div class="left">
-                    <ons-icon icon="md-lock" class="list-item__icon"></ons-icon>
-                </div>
-                <label class="center">
-                    <ons-input id="pwd-input" type="password" float maxlength="20" placeholder="Repeat Password"></ons-input>
-                </label>
-            </ons-list-item>
-            <div class="center mt-5">
-                <center><ons-button modifier="light" icon="fa-check" class="button-margin border-0 w-50 shadow">&nbsp;Sign up</ons-button></center>
-            </div>
-            <section class="mt-5">
-                <p class="text-muted text-center" onclick="fn.loadLink('https://policies.google.com/terms?hl=en-US')">Terms of Services</p>
-            </section>
-            <style>
-                .fs {
-                    font-size: 30px;
-                }
-            </style>
-      </ons-page>
-    </template>
 
 <script src="main.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

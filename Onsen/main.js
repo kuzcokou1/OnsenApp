@@ -1,7 +1,7 @@
 window.fn = {};
 
 window.fn.toggleMenu = function () {
-  	document.getElementById('appSplitter').left.toggle();
+  	document.getElementById('appSplitter').right.toggle();
 };
 
 window.fn.loadView = function (index) {
